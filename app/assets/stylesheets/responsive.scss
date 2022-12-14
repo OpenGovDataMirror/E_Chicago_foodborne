@@ -1,0 +1,71 @@
+@import "global";
+
+.visible-narrow-desktop { display: inherit !important; }
+
+/* Large desktop */
+@media (min-width: 1200px) {
+
+}
+
+/* Narrow Desktop */
+@media (min-width: 980px) and (max-width: 1199px ) {
+  .visible-narrow-desktop { display: block; }
+}
+
+/* Desktop and landscape tablet only */
+@media (min-width: 768px) and (max-width: 979px) {
+}
+
+/* Desktop and below */
+@media (max-width: 979px) {
+  #header, #nav {
+    margin-left: -20px;
+    margin-right: -20px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+ 
+/* Portrait tablet and below */
+@media (max-width: 767px) {
+  #header {
+    a.logo {
+      @include font-size(24, 24);
+
+      img { width: 50px; }
+    }
+
+    .subheader { 
+      @include font-size(14, 20);
+
+      span {
+        @include font-size(12, 12);
+      }
+    }
+  }
+}
+ 
+/* Landscape phones and below */
+@media (max-width: 480px) {
+  #header {
+    a.logo {
+      @include font-size(16, 16);
+
+      img { width: 30px; }
+    }
+
+    .subheader { 
+      &, span {
+        @include font-size(10, 12);
+      }
+    }
+  }
+
+  #nav {
+    iframe { margin-bottom: 5px; }
+  }
+}
+
+/* Phone-specific */
+@media only screen and (max-width: 480px) {
+}

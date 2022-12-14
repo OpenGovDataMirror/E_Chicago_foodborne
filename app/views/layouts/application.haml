@@ -1,0 +1,65 @@
+!!! html
+%html
+  %head
+    %title
+      Foodborne Chicago - #{content_for?(:page_title) ? yield(:page_title) : "Report incidents of food poisoning in Chicago"}
+    %meta{ :charset => 'utf-8' }
+    %meta{ :name => "viewport", :content => "width=device-width, initial-scale=1, maximum-scale=1"}
+    %meta{ :name => "twitter:card", :content => "summary" }
+    %meta{ :name => "twitter:site", :content => "@foodbornechi" }
+    %meta{ :name => "twitter:creator", :content => "@foodbornechi" }
+    %meta{ :name => "twitter:title", :content => "Foodborne Chicago" }
+    %meta{ :name => "twitter:url", :content => "https://www.foodbornechicago.org" }
+    %meta{ :name => "twitter:description", :content => "If you think you have food poisoning in Chicago, please complete this form. The info will be sent through the Chicago 311 service to the Chicago Department of Public Health so they can take any necessary action including sending a food inspector to that restaurant." }
+    %meta{ :name => "twitter:image", :content => image_url('logo_twitter.png') }
+    = stylesheet_link_tag "//fonts.googleapis.com/css?family=Open+Sans:400italic,400,700|Open+Sans+Condensed:700", :media => "all"
+    = stylesheet_link_tag "application", :media => "all"
+    /[if lt IE 9]
+      = javascript_include_tag "html5shiv"
+    = csrf_meta_tags
+  %body{:class => "#{action_name}"}
+    %header#header
+      %nav#nav.clearfix
+        .container
+          .row
+            %ul.span12
+              %li= link_to "Home", "/"
+              %li= link_to "About", page_path("about")
+              %li= link_to "Q&A", page_path("questions-answers")
+              %li= link_to "Press", page_path("press")
+              %li= link_to "Blog", "https://foodbornechicago.wordpress.com/"
+              %li
+                %a.twitter-follow-button{"data-show-count" => "false", :href => "https://twitter.com/foodbornechi"} Follow @foodbornechi
+      .container
+        .span12
+          %p.logo-wrap
+            %a.logo{:href => "/"} 
+              = image_tag "logo.png", :width => 70
+              Foodborne Chicago
+          %p.subheader 
+            Report food poisoning
+            %span to the Chicago Department of Public Health
+          %p
+            A project of  
+            %a.scc{:href => "http://www.smartchicagocollaborative.org/", title: "Smart Chicago Collaborative"}
+              = image_tag "scc_logo.png", :alt => "Smart Chicago Collaborative logo"
+            and
+            %a.scc{:href => "http://www.cityofchicago.org/city/en/depts/cdph.html", title: "Chicago Department of Public Health"}
+              = image_tag "cdph.png", :alt => "Chicago Department of Public Health logo"
+              
+    = yield
+    %script{ :type => 'text/javascript', :src => '//maps.googleapis.com/maps/api/js?sensor=false&libraries=places' }
+    = javascript_include_tag "application"
+    - if SETTINGS['GOOGLE_ANALYTICS']
+      :javascript
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', '#{SETTINGS["GOOGLE_ANALYTICS"]}']);
+        _gaq.push(['_trackPageview']);
+       
+        (function() {
+          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+
+        !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
